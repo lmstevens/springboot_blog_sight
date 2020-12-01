@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Subscriber List</title>
+	<div th:replace="/fragments/styling :: head-style"></div>
+</head>
+
+<body>
+	<div th:replace="fragments/navbar :: navbar"></div>
+	<div class="container">
+		<h1>Welcome to Our Blog Post Site!</h1>
+
+		<div class="row">
+			<div th:each="blog:${posts}">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2 th:text="${blog.title}"></h2>
+						</div>
+						<div class="panel-body">
+							<strong>
+								<p th:text="${blog.author}" /></strong>
+							<p th:text="${blog.blogEntry}" />
+						</div>
+						<div class="panel-footer">
+							<!-- index.html -->
+
+							<div class="card-footer">
+								<a href="#" th:href="@{blogposts/{id}(id=${blog.id})}">
+									<button class="btn btn-light">Edit Post</button>
+								</a>
+								<a href="#" th:href="@{blogposts/delete/{id}(id=${blog.id})}">
+									<!-- <a href="#modalID"></a> -->
+									<button id="myBtn" data-toggle="modal" href="#modalID" class="btn btn-danger" type="submit">Delete Post</button>
+									<!-- Modal -->
+									<div class="modal fade" id="myModal" role="dialog">
+										<div class="modal-dialog">
+
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close"
+														data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">Confirm your Delete Request</h4>
+												</div>
+												<div class="modal-body">
+													<p>You <strong>cannot undue</strong> this action if you decide to
+														delete your post.</p>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default"
+														data-dismiss="modal">Accept</button>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</a>
+							</div>
+							<!-- Link to Show  -->
+							<!-- <form action="#" th:action="@{'/blogposts/delete/{id}'(id=${blog.id})}" th:method="post"
+								class="form-horizontal">
+								<div class="form-group">
+									<input type="hidden" name="_method" value="delete" />
+									<button type="submit" class="btn btn-danger btn-block"
+										th:text="Delete">Delete</button>
+								</div>
+							</form> -->
+							Buttons
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="/fragments/styling :: body-links"></div>
+</body>
+
+</html>
